@@ -1,4 +1,13 @@
+*Ignora i dati grezzi
+*.fastq.gz
+*.fastq
+*fq.gz
+
 .nextflow*
+
 work/
+
 results/
+risultati_prova/
+
 .nextflow.log*
