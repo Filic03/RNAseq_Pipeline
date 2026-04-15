@@ -2,7 +2,7 @@ process TRIMGALORE {
     tag "Trimming su $sample_id"
     label 'process_medium'
 
-    container 'biocontainers/trim-galore:0.6.7--hdfd78af_0'
+    container 'quay.io/'biocontainers/trim-galore:0.6.7--hdfd78af_0'
 
     input:
     tuple val(sample_id), path(reads)
