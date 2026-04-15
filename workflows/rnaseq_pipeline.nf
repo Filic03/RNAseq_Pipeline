@@ -17,8 +17,8 @@ FASTQC(ch_reads)
 TRIMGALORE(ch_reads)
 
 ch_fasta = file(params.fasta)
-    ch_gtf   = file(params.gtf)
-    STAR_INDEX(ch_fasta, ch_gtf)
+ch_gtf   = file(params.gtf)
+STAR_INDEX(ch_fasta, ch_gtf)
 
 STAR_ALIGN(STAR_INDEX.out.index, TRIMGALORE.out.reads)
 
