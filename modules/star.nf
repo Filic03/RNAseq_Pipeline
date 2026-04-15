@@ -1,6 +1,6 @@
 process STAR_INDEX {
     tag "$fasta"
-    container 'quay.io/biocontainers/star:2.7.9a--h9ee0642_0'
+    container 'quay.io/biocontainers/star:2.7.10b--h6b7c446_1'
 
     input:
     path fasta
@@ -22,7 +22,7 @@ process STAR_INDEX {
 
 process STAR_ALIGN {
     tag "$sample_id"
-    container 'quay.io/biocontainers/star:2.7.9a--h9ee0642_0'
+    container 'quay.io/biocontainers/star:2.7.10b--h6b7c446_1'
 
     input:
     path index
