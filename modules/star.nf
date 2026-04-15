@@ -1,6 +1,6 @@
 process STAR_INDEX {
     tag "$fasta"
-    container 'biocontainers/star:2.7.9a--h9ee0642_0'
+    container 'quay.io/biocontainers/star:2.7.9a--h9ee0642_0'
 
     input:
     path fasta
