@@ -1,0 +1,22 @@
+process FEATURECOUNTS {
+    tag "$sample_id"
+    container 'biocontainers/subread:2.0.1--h7d7f7ad_1'
+
+    input:
+    path gtf
+    tuple val(sample_id), path(bam)
+
+    output:
+    path "*.txt"        , emit: counts
+    path "*.txt.summary", emit: summary
+
+    script:
+    
+    def paired = params.single_end ? "" : "-p"
+    """
+    featureCounts $paired \\
+                  -a $gtf \\
+                  -o ${sample_id}_counts.txt \\
+                  $bam
+    """
+}
