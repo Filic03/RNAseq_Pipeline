@@ -1,6 +1,6 @@
 process FASTQC {
     tag "FASTQC su $sample_id"
-    label 'process_low'
+    label 'process_high'
 
     container 'biocontainers/fastqc:v0.11.9_cv8'
 
