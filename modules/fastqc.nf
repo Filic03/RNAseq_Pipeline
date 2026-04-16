@@ -4,6 +4,8 @@ process FASTQC {
 
     container 'biocontainers/fastqc:v0.11.9_cv8'
 
+publishDir "${params.outdir}/featureCounts", mode: 'copy'
+
     input:
     tuple val(sample_id), path(reads)
 
