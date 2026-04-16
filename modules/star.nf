@@ -1,5 +1,6 @@
 process STAR_INDEX {
     tag "$fasta"
+    label 'process_high'
     container 'quay.io/biocontainers/star:2.7.10b--h6b7c446_1'
 
     input:
@@ -22,6 +23,7 @@ process STAR_INDEX {
 
 process STAR_ALIGN {
     tag "$sample_id"
+    label 'process_high'
     container 'quay.io/biocontainers/star:2.7.10b--h6b7c446_1'
 
     input:
