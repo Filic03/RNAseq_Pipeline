@@ -17,6 +17,6 @@ process TRIMGALORE {
     def single_end_flag = params.single_end ? "" : "--paired"
     
     """
-    trim_galore $single_end_flag $reads
+    trim_galore $single_end_flag --cores ${task.cpus} $reads
     """
 }
