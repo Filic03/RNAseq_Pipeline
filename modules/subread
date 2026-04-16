@@ -1,6 +1,6 @@
 process FEATURECOUNTS {
     tag "$sample_id"
-    container 'biocontainers/subread:2.0.1--h7d7f7ad_1'
+    container 'quay.io/biocontainers/subread:2.0.6--he4a0461_0'
 
     input:
     path gtf
