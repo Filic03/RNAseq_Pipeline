@@ -1,6 +1,6 @@
 process FASTQC {
     tag "FASTQC su $sample_id"
-    label 'process_high'
+    label 'process_low'
 
     container 'biocontainers/fastqc:v0.11.9_cv8'
 
@@ -13,6 +13,6 @@ process FASTQC {
 
     script:
     """
-    fastqc $reads
+    fastqc -t ${task.cpus} $reads
     """
 }
