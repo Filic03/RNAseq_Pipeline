@@ -1,5 +1,5 @@
 process FEATURECOUNTS {
-    tag "$sample_id"
+    tag "Tutti_i_campioni"
     label 'process_high'
     container 'quay.io/biocontainers/subread:2.0.6--he4a0461_0'
 
