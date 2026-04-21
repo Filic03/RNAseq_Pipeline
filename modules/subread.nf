@@ -7,7 +7,7 @@ publishDir "${params.outdir}/featureCounts", mode: 'copy'
 
     input:
     path gtf
-    tuple val(sample_id), path(bam)
+    path bams
 
     output:
     path "*.txt"        , emit: counts
@@ -20,6 +20,7 @@ publishDir "${params.outdir}/featureCounts", mode: 'copy'
     featureCounts $paired \\
                   -a $gtf \\
                   -o ${sample_id}_counts.txt \\
+                -T ${task.cpus} \\
                   $bam
     """
 }
