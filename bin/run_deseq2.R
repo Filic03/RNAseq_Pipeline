@@ -1,3 +1,4 @@
+#!/usr/bin/env Rscript
 args <- commandArgs(trailingOnly = TRUE)
 counts_file <- args [1]
 metadata_file <-args [2]
@@ -11,8 +12,21 @@ meta <- read.csv(metadata_file, row.names = 1, stringsAsFactors = TRUE)
 counts <- counts[, 6:ncol(counts)]
 
 colnames(counts) <-gsub("\\.bam$", "", colnames(counts))
+colnames(counts) <- gsub(".*SRR", "SRR", colnames(counts)) 
+colnames(counts) <- gsub("_1_trimmed.*", "", colnames(counts)) 
+colnames(counts) <- gsub("\\..*", "", colnames(counts))
 
 common_samples <- intersect(colnames(counts), rownames(meta))
+
+if (length(common_samples) == 0) {
+    messaggio <- paste("\n\n#####################################################\n",
+                       "ERRORE FATALE: I nomi dei campioni non combaciano!\n",
+                       "Nomi nella Matrice: ", paste(colnames(counts), collapse=" , "), "\n",
+                       "Nomi nel Samplesheet: ", paste(rownames(meta), collapse=" , "), "\n",
+                       "#####################################################\n\n")
+    stop(messaggio)
+}
+
 counts <- counts[, common_samples]
 meta <- meta[common_samples, , drop=FALSE]
 
