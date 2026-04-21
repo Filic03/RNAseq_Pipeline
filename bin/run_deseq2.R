@@ -35,6 +35,7 @@ design_formula <- as.formula(paste("~", user_design))
 dds <- DESeqDataSetFromMatrix(countData = counts, colData = meta, design = design_formula)
 keep <- rowSums(counts(dds)) >= 10
 dds <- dds[keep,]
+dds <- estimateSizeFactors(dds, type = "poscounts")
 dds <- DESeq(dds)
 res <- results(dds)
 
