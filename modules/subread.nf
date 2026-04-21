@@ -19,8 +19,8 @@ publishDir "${params.outdir}/featureCounts", mode: 'copy'
     """
     featureCounts $paired \\
                   -a $gtf \\
-                  -o ${sample_id}_counts.txt \\
+                  -o matrice_conteggi.txt \\
                 -T ${task.cpus} \\
-                  $bam
+                  $bams
     """
 }
