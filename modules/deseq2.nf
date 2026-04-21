@@ -4,7 +4,7 @@ process DESEQ2 {
 
     publishDir "${params.outdir}/deseq2", mode: 'copy'
    
-    container 'quay.io/biocontainers/bioconductor-deseq2:1.38.0--r42hdfd78af_0'
+    container 'quay.io/biocontainers/bioconductor-deseq2:1.42.0--r43hf17093f_0'
 
     input:
     path counts     
