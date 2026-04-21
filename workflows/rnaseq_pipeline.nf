@@ -23,7 +23,7 @@ STAR_INDEX(ch_fasta, ch_gtf)
 
 STAR_ALIGN(STAR_INDEX.out.index, TRIMGALORE.out.reads)
 
-ch_bams_raccolti = STAR.ALIGN.out.bam.map { it[1] }.collect()
+ch_bams_raccolti = STAR_ALIGN.out.bam.map { it[1] }.collect()
 FEATURECOUNTS(ch_gtf, ch_bams_raccolti)
 
     ch_multiqc_files = Channel.empty()
