@@ -67,6 +67,18 @@ colori_heatmap <- colorRampPalette(c("blue", "white", "red"))(256)
 heatmap(mat, scale="none", col=colori_heatmap, margins=c(8,10), main="4. Heatmap Top 50 Geni")
 
 
+#Plot dei conteggi per i Top 4 Geni
+par(mfrow=c(2,2)) 
+top4_geni <- head(order(res$padj), 4)
+for (i in top4_geni) {
+  nome_del_gene <- rownames(res)[i]
+  plotCounts(dds, gene=nome_del_gene, intgroup="condition", 
+             main=paste("Espressione di:", nome_del_gene),
+             col=c("blue", "red")[dds$condition], pch=16)
+}
+par(mfrow=c(1,1))
+
+
 
 
 dev.off()
