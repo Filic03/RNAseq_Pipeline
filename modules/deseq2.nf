@@ -12,7 +12,7 @@ container 'quay.io/biocontainers/bioconductor-deseq2:1.50.2--r45ha27e39d_0'
     path samplesheet  
 
     output:
-    path "*.csv", emit: results_csv
+    path "*.{csv,txt}", emit: results_tables
     path "*.pdf", emit: results_pdf
 
     script:
