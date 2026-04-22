@@ -89,6 +89,30 @@ for (i in top4_geni) {
 par(mfrow=c(1,1))
 
 
+# EXTRA: ANALISI DEI PATHWAY (CLUSTERPROFILER)
+library(clusterProfiler)
+library(org.Hs.eg.db)
+
+geni_significativi <- rownames(subset(res, padj < 0.05 & abs(log2FoldChange) > 1))
+
+pathway_go <- enrichGO(
+  gene          = geni_significativi,
+  keyType       = "SYMBOL",     # Gli diciamo che stiamo usando i nomi (es. ISG15) e non i codici ENSG
+  OrgDb         = org.Hs.eg.db, # Il database del genoma umano
+  ont           = "BP",         # BP = Biological Process (cosa fanno nel corpo)
+  pAdjustMethod = "BH",
+  pvalueCutoff  = 0.05,
+  qvalueCutoff  = 0.05
+)
+
+pdf("pathway_analisi.pdf", width=10, height=8)
+# Disegniamo il Dotplot (il grafico più famoso per i pathway)
+print(dotplot(pathway_go, showCategory=15, title="Top 15 Pathway Alterati"))
+dev.off()
+
+write.csv(as.data.frame(pathway_go), "risultati_pathway_biologici.csv")
+
+
 
 
 dev.off()
