@@ -52,8 +52,9 @@ res_df <- as.data.frame(res)
 tabella_completa <- merge(res_df, conteggi_normalizzati, by="row.names", all=TRUE)
 colnames(tabella_completa)[1] <- "Gene_Name"
 tabella_completa <- tabella_completa[order(tabella_completa$padj), ]
-write.csv(tabella_completa, "risultati_completi_con_conteggi.csv", row.names=FALSE)
 
+
+write.table(as.data.frame(tabella_completa), file="tabella_completa.txt", sep="\t", quote=FALSE, row.names=FALSE)
 
 #--- PLOTS ---
 
