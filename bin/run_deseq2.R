@@ -5,6 +5,7 @@ metadata_file <-args [2]
 user_design <-args[3]
 
 library(DESeq2)
+library(ggplot2)
 
 counts <- read.table(counts_file, header = TRUE, row.names = 1, stringsAsFactors = FALSE)
 meta <- read.csv(metadata_file, row.names = 1, stringsAsFactors = TRUE)
@@ -47,7 +48,8 @@ pdf ("deseq2_plots_prova.pdf")
 plotMA(res, main="MA Plot (test nf-core)")
 
 vsd <- vst(dds, blind=FALSE)
-plotPCA(vsd, intgroup="condition") + ggtitle("2. PCA")
+pca_plot <- plotPCA(vsd, intgroup="condition") + ggtitle("2. PCA")
+print(pca_plot)
 
 with(res, plot(log2FoldChange, -log10(padj), pch=20, main="3. Volcano Plot", col="darkgrey", xlim=c(-5,5)))
 with(subset(res, padj < 0.05 & abs(log2FoldChange) > 1), points(log2FoldChange, -log10(padj), pch=20, col="red"))
