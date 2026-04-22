@@ -40,6 +40,8 @@ res <- results(dds)
 
 write.csv(as.data.frame(res), "risultati_analisi_differenziale.csv")
 
+#ora passiamo alla parte dei grafici
+
 pdf ("deseq2_plots_prova.pdf")
 
 plotMA(res, main="MA Plot (test nf-core)")
