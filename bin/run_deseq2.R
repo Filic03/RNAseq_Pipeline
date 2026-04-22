@@ -41,6 +41,16 @@ res <- results(dds)
 
 write.csv(as.data.frame(res), "risultati_analisi_differenziale.csv")
 
+
+# --- CREAZIONE DEL SUPER-EXCEL ---
+conteggi_normalizzati <- counts(dds, normalized=TRUE)
+res_df <- as.data.frame(res)
+tabella_completa <- merge(res_df, conteggi_normalizzati, by="row.names", all=TRUE)
+colnames(tabella_completa)[1] <- "Gene_Name"
+tabella_completa <- tabella_completa[order(tabella_completa$padj), ]
+write.csv(tabella_completa, "risultati_completi_con_conteggi.csv", row.names=FALSE)
+
+
 #Grafici
 
 pdf ("deseq2_plots.pdf")
