@@ -6,7 +6,7 @@ include { MULTIQC } from '../modules/multiqc'
 include { DESEQ2 } from '../modules/deseq2'
 
 workflow RNA_SEQ_ANALYSIS {
-log.info "Analisi RNA-seq iniziata..."
+log.info "RNA-seq analysis started..."
 
 if (params.single_end) {
 ch_reads = Channel.fromPath(params.input_reads, checkIfExists: true)
@@ -40,5 +40,5 @@ FEATURECOUNTS(ch_gtf, ch_bams_raccolti)
 DESEQ2(FEATURECOUNTS.out.counts, file(params.samplesheet))
 
 
-log.info "L'analisi è terminata con successo!"
+log.info "The analysis completed successfully!"
 }
