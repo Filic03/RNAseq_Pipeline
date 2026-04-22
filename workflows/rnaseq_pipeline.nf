@@ -38,7 +38,4 @@ FEATURECOUNTS(ch_gtf, ch_bams_raccolti)
     MULTIQC( ch_multiqc_files.collect() )
 
 DESEQ2(FEATURECOUNTS.out.counts, file(params.samplesheet))
-
-
-log.info "The analysis completed successfully!"
 }
