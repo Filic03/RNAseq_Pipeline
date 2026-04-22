@@ -1,7 +1,7 @@
 process STAR_INDEX {
     tag "$fasta"
     label 'process_high'
-publishDir "$params.outdir}/star_index", mode: 'copy'
+publishDir "${params.outdir}/star_index", mode: 'copy'
 
     container 'quay.io/biocontainers/star:2.7.10b--h6b7c446_1'
 
