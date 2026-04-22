@@ -20,12 +20,12 @@ colnames(counts) <- gsub("\\..*", "", colnames(counts))
 common_samples <- intersect(colnames(counts), rownames(meta))
 
 if (length(common_samples) == 0) {
-    messaggio <- paste("\n\n#####################################################\n",
-                       "ERRORE FATALE: I nomi dei campioni non combaciano!\n",
-                       "Nomi nella Matrice: ", paste(colnames(counts), collapse=" , "), "\n",
-                       "Nomi nel Samplesheet: ", paste(rownames(meta), collapse=" , "), "\n",
+    message <- paste("\n\n#####################################################\n",
+                       "FATAL ERROR: The sample names do not correspond!\n",
+                       "Matrix names: ", paste(colnames(counts), collapse=" , "), "\n",
+                       "Samplesheet names: ", paste(rownames(meta), collapse=" , "), "\n",
                        "#####################################################\n\n")
-    stop(messaggio)
+    stop(message)
 }
 
 counts <- counts[, common_samples]
@@ -55,7 +55,7 @@ tabella_completa <- tabella_completa[order(tabella_completa$padj), ]
 write.csv(tabella_completa, "risultati_completi_con_conteggi.csv", row.names=FALSE)
 
 
-#PLOTS
+#--- PLOTS ---
 
 pdf ("deseq2_plots.pdf")
 
@@ -81,7 +81,7 @@ colori_heatmap <- colorRampPalette(c("blue", "white", "red"))(256)
 heatmap(mat, scale="none", col=colori_heatmap, margins=c(8,10), main="4. Heatmap Top 50 Geni")
 
 
-#Plot dei conteggi per i Top 4 Geni
+# Top 4 genes counts plot
 par(mfrow=c(2,2)) 
 top4_geni <- head(order(res$padj), 4)
 for (i in top4_geni) {
