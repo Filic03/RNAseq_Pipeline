@@ -6,7 +6,6 @@ user_design <-args[3]
 
 library(DESeq2)
 library(ggplot2)
-library(pheatmap)
 
 counts <- read.table(counts_file, header = TRUE, row.names = 1, stringsAsFactors = FALSE)
 meta <- read.csv(metadata_file, row.names = 1, stringsAsFactors = TRUE)
@@ -64,8 +63,8 @@ abline(h=-log10(0.05), col="blue", lty=2)
 top_genes <- head(order(res$padj), 50)
 mat <- assay(vsd)[top_genes, ]
 mat <- mat - rowMeans(mat)
-df_annotazione <- as.data.frame(colData(dds)[,"condition", drop=FALSE])
-pheatmap(mat, annotation_col=df_annotazione, main="4. Heatmap Top 50 Geni", show_rownames=TRUE, cluster_cols=TRUE)
+colori_heatmap <- colorRampPalette(c("blue", "white", "red"))(256)
+heatmap(mat, scale="none", col=colori_heatmap, margins=c(8,10), main="4. Heatmap Top 50 Geni")
 
 
 
