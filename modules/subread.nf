@@ -17,10 +17,6 @@ publishDir "${params.outdir}/featureCounts", mode: 'copy'
     
     def paired = params.single_end ? "" : "-p"
     """
-    featureCounts $paired \\
-                  -a $gtf \\
-                  -o matrice_conteggi.txt \\
-                -T ${task.cpus} \\
-                  $bams
+    featureCounts $paired -a $gtf -o matrice_conteggi.txt -T ${task.cpus} -g gene_name $bams
     """
 }
