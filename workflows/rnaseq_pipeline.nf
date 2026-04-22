@@ -39,4 +39,6 @@ FEATURECOUNTS(ch_gtf, ch_bams_raccolti)
 
 DESEQ2(FEATURECOUNTS.out.counts, file(params.samplesheet))
 
+
+log.info "L'analisi è terminata con successo!"
 }
