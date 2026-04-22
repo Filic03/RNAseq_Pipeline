@@ -41,5 +41,16 @@ res <- results(dds)
 write.csv(as.data.frame(res), "risultati_analisi_differenziale.csv")
 
 pdf ("deseq2_plots.pdf")
+
 plotMA(res, main="MA Plot (test nf-core)")
+
+vsd <- vst(dds, blind=FALSE)
+plotPCA(vsd, intgroup="condition") + ggtitle("2. PCA")
+
+with(res, plot(log2FoldChange, -log10(padj), pch=20, main="3. Volcano Plot", col="darkgrey", xlim=c(-5,5)))
+with(subset(res, padj < 0.05 & abs(log2FoldChange) > 1), points(log2FoldChange, -log10(padj), pch=20, col="red"))
+abline(v=c(-1,1), col="blue", lty=2)
+abline(h=-log10(0.05), col="blue", lty=2)
+
+
 dev.off()
