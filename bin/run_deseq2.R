@@ -6,6 +6,7 @@ user_design <-args[3]
 
 library(DESeq2)
 library(ggplot2)
+library(pheatmap)
 
 counts <- read.table(counts_file, header = TRUE, row.names = 1, stringsAsFactors = FALSE)
 meta <- read.csv(metadata_file, row.names = 1, stringsAsFactors = TRUE)
@@ -41,20 +42,32 @@ res <- results(dds)
 
 write.csv(as.data.frame(res), "risultati_analisi_differenziale.csv")
 
-#ora passiamo alla parte dei grafici
+#Grafici
 
-pdf ("deseq2_plots_prova.pdf")
+pdf ("deseq2_plots.pdf")
 
+#MA plot
 plotMA(res, main="MA Plot (test nf-core)")
 
+#PCA plot
 vsd <- vst(dds, blind=FALSE)
 pca_plot <- plotPCA(vsd, intgroup="condition") + ggtitle("2. PCA")
 print(pca_plot)
 
+#Volcano Plot
 with(res, plot(log2FoldChange, -log10(padj), pch=20, main="3. Volcano Plot", col="darkgrey", xlim=c(-5,5)))
 with(subset(res, padj < 0.05 & abs(log2FoldChange) > 1), points(log2FoldChange, -log10(padj), pch=20, col="red"))
 abline(v=c(-1,1), col="blue", lty=2)
 abline(h=-log10(0.05), col="blue", lty=2)
+
+#Heatmap
+top_genes <- head(order(res$padj), 50)
+mat <- assay(vsd)[top_genes, ]
+mat <- mat - rowMeans(mat)
+df_annotazione <- as.data.frame(colData(dds)[,"condition", drop=FALSE])
+pheatmap(mat, annotation_col=df_annotazione, main="4. Heatmap Top 50 Geni", show_rownames=TRUE, cluster_cols=TRUE)
+
+
 
 
 dev.off()
