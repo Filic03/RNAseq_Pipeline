@@ -39,10 +39,14 @@ dds <- dds[keep,]
 dds <- DESeq(dds, sfType="poscounts")
 res <- results(dds)
 
-write.csv(as.data.frame(res), "risultati_analisi_differenziale.csv")
+write.table(as.data.frame(res), file="risultati_analisi_differenziale.txt", sep="\t", quote=FALSE, row.names=FALSE)
 
+res_clean <- res[!is.na(res$padj), ]
+res_filt <- res_clean[res_clean$padj < 0.05 & abs(res_clean$log2FoldChange) > 1.5, ]
 
-# --- CREAZIONE DEL SUPER-EXCEL ---
+write.table(as.data.frame(res_filt), file="risultati_filtrati_stringenti.txt", sep="\t", quote=FALSE, row.names=FALSE)
+
+# --- SUPER EXCEL CREATIONS ---
 conteggi_normalizzati <- counts(dds, normalized=TRUE)
 res_df <- as.data.frame(res)
 tabella_completa <- merge(res_df, conteggi_normalizzati, by="row.names", all=TRUE)
@@ -51,7 +55,7 @@ tabella_completa <- tabella_completa[order(tabella_completa$padj), ]
 write.csv(tabella_completa, "risultati_completi_con_conteggi.csv", row.names=FALSE)
 
 
-#Grafici
+#PLOTS
 
 pdf ("deseq2_plots.pdf")
 
