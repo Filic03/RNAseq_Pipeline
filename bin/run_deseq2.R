@@ -97,7 +97,7 @@ top_genes <- head(order(res$padj), 50)
 mat <- assay(vsd)[top_genes, ]
 mat <- mat - rowMeans(mat)
 df_annotazione <- as.data.frame(colData(dds)[, var_target, drop=FALSE])
-colnames(df_annotazione) <- "Condizione" # Cambiamo nome per la legenda
+colnames(df_annotazione) <- "Condition"
 livelli <- levels(as.factor(df_annotazione$Condizione))
 colori_condizione <- c("#00ced1", "#fa8072", "#33a02c", "#ff7f00")[1:length(livelli)]
 names(colori_condizione) <- livelli
@@ -105,9 +105,9 @@ colori_annotazione <- list(Condizione = colori_condizione)
 pheatmap(mat, 
          annotation_col = df_annotazione, 
          annotation_colors = colori_annotazione,
-         show_colnames = TRUE,      # Metti FALSE se preferisci nascondere i nomi sotto (come nella tua foto)
-         border_color = "white",    # Il bordino bianco elegante tra le celle
-         fontsize_row = 8,          # Geni un po' più piccoli per non accavallarli
+         show_colnames = TRUE,      
+         border_color = "white",    
+         fontsize_row = 8,          
          main = paste("Heatmap Top 50 Genes (", var_target, ")")
 )
 
