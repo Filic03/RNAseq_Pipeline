@@ -136,6 +136,7 @@ p <- ggplot(tutti_i_dati, aes(x=Gruppo, y=count, fill=Gruppo)) +
     panel.spacing = unit(1, "lines")                                
   ) +
   scale_fill_manual(values=c("#00ced1", "#fa8072", "#33a02c", "#ff7f00"))
+print(p)
 
 
 dev.off()
