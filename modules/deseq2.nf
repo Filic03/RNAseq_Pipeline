@@ -17,6 +17,6 @@ container 'quay.io/biocontainers/bioconductor-deseq2:1.50.2--r45ha27e39d_0'
 
     script:
     """
-    Rscript ${projectDir}/bin/run_deseq2.R $counts $samplesheet ${params.design}
+    Rscript ${projectDir}/bin/run_deseq2.R $counts $samplesheet "${params.design}"
     """
 }
