@@ -94,41 +94,18 @@ colori_heatmap <- colorRampPalette(c("blue", "white", "red"))(256)
 
 heatmap(mat, scale="none", col=colori_heatmap, margins=c(6, 6), cexCol=0.9, cexRow=0.8, main="4. Heatmap Top 50 Genes")
 
+#Top 6 Genes
+par(mfrow=c(3,2)) 
 
-
-library(ggplot2)
-gruppi_design <- trimws(unlist(strsplit(user_design, "\\+")))
-var_target <- tail(gruppi_design, n=1)
 top6_geni <- head(order(res$padj), 6)
+
 for (i in top6_geni) {
+
   nome_del_gene <- rownames(res)[i]
-  
-  dati_gene <- plotCounts(dds, gene=nome_del_gene, intgroup=var_target, returnData=TRUE)
-  
-  
-  dati_gene$Gruppo <- dati_gene[[var_target]]
-  
 
-  p <- ggplot(dati_gene, aes(x=Gruppo, y=count, fill=Gruppo)) +
-    # Disegniamo una barra orizzontale grigia per indicare la "Media" del gruppo
-    stat_summary(fun = mean, geom = "crossbar", width = 0.4, color="gray50", size=0.5) +
-    # Mettiamo i pallini dei campioni veri (più grandi, con bordo nero)
-    geom_jitter(width=0.1, size=4, shape=21, color="black", stroke=0.8) +
-    scale_y_log10() +                                         
-    theme_minimal() +                                         
-    labs(title=nome_del_gene,
-         x="",
-         y="Conteggi Normalizzati (Scala Log10)") +
-    theme(
-      plot.title = element_text(hjust=0.5, face="bold", size=16),
-      legend.position = "none",                               
-      axis.text.x = element_text(size=12, face="bold", color="black"),
-      axis.text.y = element_text(size=11, color="black"),
-      panel.grid.minor = element_blank()                      
-    ) +
-    scale_fill_manual(values=c("#00ced1", "#fa8072", "#33a02c", "#ff7f00"))
-  
+  plotCounts(dds, gene=nome_del_gene, intgroup="condition", main=paste("Expression of:", nome_del_gene), col=c("blue", "red")[dds$condition], pch=16)
 
+}
 
 par(mfrow=c(1,1))
 
