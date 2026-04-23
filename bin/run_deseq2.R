@@ -97,12 +97,18 @@ heatmap(mat, scale="none", col=colori_heatmap, margins=c(6, 6), cexCol=0.9, cexR
 
 # Top 6 genes counts plot
 
-par(mfrow=c(3,2)) 
+par(mfrow=c(3,2), las=1) 
+
+colori_pro <- c("#1f78b4", "#e31a1c") 
 
 top6_geni <- head(order(res$padj), 6)
+
 for (i in top6_geni) {
-    nome_del_gene <- rownames(res)[i]
-    plotCounts(dds, gene=nome_del_gene, intgroup="condition", main=paste("Expression of:", nome_del_gene), col=c("blue", "red")[dds$condition], pch=16)
+  nome_del_gene <- rownames(res)[i]
+  
+  # Il tuo plotCounts base, ma con le opzioni estetiche attivate
+  plotCounts(dds, gene = nome_del_gene, intgroup = "condition", main = "Espression of:" nome_del_gene, col = colori_pro[dds$condition], pch = 16, cex = 1.5, xlab = "", ylab = "Normalized Counts"
+  )
 }
 
 par(mfrow=c(1,1))
