@@ -87,15 +87,39 @@ abline(h=-log10(0.05), col="blue", lty=2)
 
 #Heatmap
 gruppi_design <- trimws(unlist(strsplit(user_design, "\\+")))
-variabile_principale <- tail(gruppi_design, n=1)
-gruppi_campioni <- as.character(colData(dds)[[variabile_principale]])
 top_genes <- head(order(res$padj), 50)
 mat <- assay(vsd)[top_genes, ]
 mat <- mat - rowMeans(mat)
-colnames(mat) <- paste0(colnames(mat), " (", gruppi_campioni, ")")
 colori_heatmap <- colorRampPalette(c("blue", "white", "red"))(256)
-heatmap(mat, scale="none", col=colori_heatmap, margins=c(15,10), 
-        main=paste("4. Heatmap Top 50 Genes"))
+get_colors <- function(vec) {
+  levels <- as.factor(vec)
+  palette <- c("#33a02c", "#ff7f00", "#1f78b4", "#e31a1c")
+  return(palette[as.numeric(levels)])
+}
+if (length(gruppi_design) > 1) {
+    # Se hai più variabili (condition + age), creiamo più barre
+    col_colors <- matrix(NA, nrow = length(gruppi_design), ncol = ncol(mat))
+    for (i in 1:length(gruppi_design)) {
+        col_colors[i,] <- get_colors(colData(dds)[[gruppi_design[i]]])
+    }
+    rownames(col_colors) <- gruppi_design
+} else {
+    # Se hai solo una variabile
+    col_colors <- get_colors(colData(dds)[[gruppi_design[1]]])
+}
+heatmap(mat, 
+        scale="none", 
+        col=colori_heatmap, 
+        margins=c(10,10), 
+        main="4. Heatmap: Top 50 Differential Genes",
+        ColSideColors=col_colors,
+        cexCol=1.1, 
+        cexRow=0.8)
+legend("topright", 
+       legend=levels(as.factor(colData(dds)[[gruppi_design[1]]])), 
+       fill=c("#33a02c", "#ff7f00"), 
+       title=gruppi_design[1], 
+       bty="n", cex=0.7)
 
 
 # Top 4 genes counts plot
