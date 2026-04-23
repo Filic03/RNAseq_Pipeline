@@ -102,11 +102,11 @@ par(mfrow=c(3,2), las=1)
 colori_pro <- c("#1f78b4", "#e31a1c") 
 
 top6_geni <- head(order(res$padj), 6)
-
+limit_y <- c(0.5, max_value)
 for (i in top6_geni) {
   nome_del_gene <- rownames(res)[i]
   
-  plotCounts(dds, gene = nome_del_gene, intgroup = "condition", main = paste("Expression of:", nome_del_gene), col = colori_pro[dds$condition], pch = 16, cex = 1.5)
+  plotCounts(dds, gene = nome_del_gene, intgroup = "condition", main = paste("Expression of:", nome_del_gene), col = colori_pro[dds$condition], pch = 16, cex = 1.5, ylim = limit_y)
 }
 
 par(mfrow=c(1,1))
