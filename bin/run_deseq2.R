@@ -21,7 +21,7 @@ common_samples <- intersect(colnames(counts), rownames(meta))
 
 if (length(common_samples) == 0) {
     message <- paste("\n\n#####################################################\n",
-                       "FATAL ERROR: The sample names do not correspond!\n",
+                       "ERROR: The sample names do not correspond!\n",
                        "Matrix names: ", paste(colnames(counts), collapse=" , "), "\n",
                        "Samplesheet names: ", paste(rownames(meta), collapse=" , "), "\n",
                        "#####################################################\n\n")
