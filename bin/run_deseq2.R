@@ -65,7 +65,18 @@ plotMA(res, main="MA Plot (test nf-core)")
 
 #PCA plot
 vsd <- vst(dds, blind=FALSE)
-pca_plot <- plotPCA(vsd, intgroup="condition") + ggtitle("2. PCA")
+gruppi_pca <- trimws(unlist(strsplit(user_design, "\\+")))
+
+pca_plot <- plotPCA(vsd, intgroup=gruppi_pca) + theme_minimal() + geom_point(size=4, alpha=0.9) + ggtitle("2. PCA") +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = "bold", size = 15), 
+    panel.grid.major = element_line(color = "grey90"),                
+    panel.grid.minor = element_blank(),
+    legend.title = element_text(face="bold", size=12), 
+    legend.text = element_text(size = 11),                            
+    axis.title = element_text(size = 12, face = "bold")               
+  )
+
 print(pca_plot)
 
 #Volcano Plot
