@@ -86,11 +86,19 @@ abline(v=c(-1,1), col="blue", lty=2)
 abline(h=-log10(0.05), col="blue", lty=2)
 
 #Heatmap
+gruppi_design <- trimws(unlist(strsplit(user_design, "\\+")))
+variabile_principale <- tail(gruppi_design, n=1)
+gruppi_campioni <- as.factor(colData(dds)[[variabile_principale]])
+colori_gruppi <- c("forestgreen", "darkorange", "purple", "cyan")[as.numeric(gruppi_campioni)]
 top_genes <- head(order(res$padj), 50)
 mat <- assay(vsd)[top_genes, ]
 mat <- mat - rowMeans(mat)
 colori_heatmap <- colorRampPalette(c("blue", "white", "red"))(256)
-heatmap(mat, scale="none", col=colori_heatmap, margins=c(8,10), main="4. Heatmap Top 50 Genes")
+heatmap(mat, scale="none", col=colori_heatmap, margins=c(8,10), 
+        ColSideColors=colori_gruppi, main=paste("4. Heatmap Top 50 Genes (", variabile_principale, ")"))
+legend("topright", legend=levels(gruppi_campioni), 
+       fill=c("forestgreen", "darkorange", "purple", "cyan")[1:length(levels(gruppi_campioni))], 
+       border=FALSE, bty="n", cex=0.8)
 
 
 # Top 4 genes counts plot
