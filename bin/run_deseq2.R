@@ -94,7 +94,7 @@ heatmap(mat, scale="none", col=colori_heatmap, margins=c(8,10), main="4. Heatmap
 
 
 # Top 4 genes counts plot
-par(mfrow=c(3,3)) 
+par(mfrow=c(2,3)) 
 top6_geni <- head(order(res$padj), 6)
 for (i in top6_geni) {
   nome_del_gene <- rownames(res)[i]
