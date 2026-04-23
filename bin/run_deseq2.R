@@ -94,20 +94,48 @@ colori_heatmap <- colorRampPalette(c("blue", "white", "red"))(256)
 
 heatmap(mat, scale="none", col=colori_heatmap, margins=c(6, 6), cexCol=0.9, cexRow=0.8, main="4. Heatmap Top 50 Genes")
 
+
 #Top 6 Genes
-par(mfrow=c(3,2)) 
+library(ggplot2)
+
+gruppi_design <- trimws(unlist(strsplit(user_design, "\\+")))
+var_target <- tail(gruppi_design, n=1)
 
 top6_geni <- head(order(res$padj), 6)
 
+tutti_i_dati <- data.frame()
+
+
 for (i in top6_geni) {
-
   nome_del_gene <- rownames(res)[i]
+  dati_gene <- plotCounts(dds, gene=nome_del_gene, intgroup=var_target, returnData=TRUE)
+  
 
-  plotCounts(dds, gene=nome_del_gene, intgroup="condition", main=paste("Expression of:", nome_del_gene), col=c("blue", "red")[dds$condition], pch=16)
-
+  dati_gene$Gruppo <- dati_gene[[var_target]]
+  dati_gene$Gene <- nome_del_gene 
+  
+  tutti_i_dati <- rbind(tutti_i_dati, dati_gene)
 }
 
-par(mfrow=c(1,1))
+p <- ggplot(tutti_i_dati, aes(x=Gruppo, y=count, fill=Gruppo)) +
+  stat_summary(fun = mean, geom = "crossbar", width = 0.4, color="gray50", size=0.5) +
+  geom_jitter(width=0.1, size=3, shape=21, color="black", stroke=0.8) +
+  scale_y_log10() +
+  theme_minimal() +
+  labs(title="Expression of Top 6 Differentially Expressed Genes", x="", y="Normalized Counts (log10)") +
+  facet_wrap(~ Gene, ncol=2, scales="free_y") + 
+  
+
+  theme(
+    plot.title = element_text(hjust=0.5, face="bold", size=16, margin=margin(b=20)),
+    legend.position = "none",
+    strip.text = element_text(size=12, face="bold", color="black"),
+    strip.background = element_rect(fill="gray90", color=NA),       
+    axis.text.x = element_text(size=11, face="bold", color="black"),
+    axis.text.y = element_text(size=10, color="black"),
+    panel.spacing = unit(1, "lines")                                
+  ) +
+  scale_fill_manual(values=c("#00ced1", "#fa8072", "#33a02c", "#ff7f00"))
 
 
 dev.off()
