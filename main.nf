@@ -12,13 +12,6 @@ You must specify the column of the sample sheet to use for differential analysis
     """
 }
 
-include { RNA_SEQ_ANALYSIS } from './workflows/rnaseq_pipeline'
-
-workflow {
-    RNA_SEQ_ANALYSIS()
-}
-
-
 include {RNA_SEQ_ANALYSIS} from './workflows/rnaseq_pipeline'
 
 workflow {
