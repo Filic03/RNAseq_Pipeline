@@ -86,27 +86,30 @@ abline(v=c(-1,1), col="blue", lty=2)
 abline(h=-log10(0.05), col="blue", lty=2)
 
 #Heatmap
+cartella_lavoro <- getwd()
+if (!require("pheatmap", character.only = TRUE)) {
+  install.packages("pheatmap", repos="https://cloud.r-project.org", lib=cartella_lavoro)
+  library(pheatmap, lib.loc=cartella_lavoro)
+}
 gruppi_design <- trimws(unlist(strsplit(user_design, "\\+")))
 var_target <- tail(gruppi_design, n=1)
 top_genes <- head(order(res$padj), 50)
 mat <- assay(vsd)[top_genes, ]
 mat <- mat - rowMeans(mat)
-colori_heatmap <- colorRampPalette(c("blue", "white", "red"))(256)
-etichette <- as.factor(colData(dds)[[var_target]])
-colori_barra <- c("#33a02c", "#ff7f00", "#1f78b4", "#e31a1c")[as.numeric(etichette)]
-heatmap(mat, 
-        scale="none", 
-        col=colori_heatmap, 
-        margins=c(12,10), 
-        main=paste("4. Heatmap: Top 50 Genes by", var_target),
-        ColSideColors=colori_barra, # Ora è un vettore semplice, R non protesterà!
-        cexCol=1.1, 
-        cexRow=0.8)
-legend("topright", 
-       legend=levels(etichette), 
-       fill=c("#33a02c", "#ff7f00", "#1f78b4", "#e31a1c")[1:length(levels(etichette))], 
-       title=var_target, 
-       bty="n", cex=0.7)
+df_annotazione <- as.data.frame(colData(dds)[, var_target, drop=FALSE])
+colnames(df_annotazione) <- "Condizione" # Cambiamo nome per la legenda
+livelli <- levels(as.factor(df_annotazione$Condizione))
+colori_condizione <- c("#00ced1", "#fa8072", "#33a02c", "#ff7f00")[1:length(livelli)]
+names(colori_condizione) <- livelli
+colori_annotazione <- list(Condizione = colori_condizione)
+pheatmap(mat, 
+         annotation_col = df_annotazione, 
+         annotation_colors = colori_annotazione,
+         show_colnames = TRUE,      # Metti FALSE se preferisci nascondere i nomi sotto (come nella tua foto)
+         border_color = "white",    # Il bordino bianco elegante tra le celle
+         fontsize_row = 8,          # Geni un po' più piccoli per non accavallarli
+         main = paste("Heatmap Top 50 Genes (", var_target, ")")
+)
 
 
 # Top 4 genes counts plot
