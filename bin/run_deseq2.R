@@ -95,20 +95,31 @@ colori_heatmap <- colorRampPalette(c("blue", "white", "red"))(256)
 heatmap(mat, scale="none", col=colori_heatmap, margins=c(6, 6), cexCol=0.9, cexRow=0.8, main="4. Heatmap Top 50 Genes")
 
 
-# Top 6 genes counts plot
-
+# 5. Top 6 genes counts plot
 par(mfrow=c(3,2), las=1) 
 
 colori_pro <- c("#1f78b4", "#e31a1c") 
-
 top6_geni <- head(order(res$padj), 6)
-limit_y <- c(0.5, max_value)
+
+conteggi_top6 <- counts(dds, normalized=TRUE)[top6_geni, ]
+massimo_assoluto <- max(conteggi_top6)
+
+limiti_y <- c(0.5, massimo_assoluto)
+
 for (i in top6_geni) {
   nome_del_gene <- rownames(res)[i]
   
-  plotCounts(dds, gene = nome_del_gene, intgroup = "condition", main = paste("Expression of:", nome_del_gene), col = colori_pro[dds$condition], pch = 16, cex = 1.5, ylim = limit_y)
+  # Disegniamo aggiungendo il parametro 'ylim'
+  plotCounts(dds, 
+             gene = nome_del_gene, 
+             intgroup = "condition", 
+             main = paste("Expression of:", nome_del_gene),
+             col = colori_pro[dds$condition], 
+             pch = 16,                             
+             cex = 1.5,
+             ylim = limiti_y 
+  )
 }
 
-par(mfrow=c(1,1))
 
 dev.off()
