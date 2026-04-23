@@ -2,7 +2,7 @@ nextflow.enable.dsl=2
 
 if (!params.design) {
     exit 1, """
-    ❌ CRITICAL ERROR: '--design' missing!
+    ❌ WAIT! The analysis cannot start: '--design' missing!
 You must specify the column of the sample sheet to use for differential analysis.
     
     Example:
