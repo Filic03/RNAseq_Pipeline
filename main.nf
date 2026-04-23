@@ -3,11 +3,11 @@ nextflow.enable.dsl=2
 if (!params.design) {
     exit 1, """
     ❌ WAIT! The analysis cannot start: '--design' missing!
-You must specify the column of the sample sheet to use for differential analysis.
+You must specify the column(s) of the samplesheet to use for differential analysis.
     
     Example:
     nextflow run main.nf --design "condition" -resume
-    nextflow run main.nf --design "treatment" -profile test
+    nextflow run main.nf --design "treatment + age" -profile test
     =======================================================
     """
 }
