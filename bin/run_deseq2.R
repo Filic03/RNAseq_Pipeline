@@ -86,33 +86,23 @@ abline(v=c(-1,1), col="blue", lty=2)
 abline(h=-log10(0.05), col="blue", lty=2)
 
 #Heatmap
-cartella_lavoro <- getwd()
-if (!require("pheatmap", character.only = TRUE)) {
-  install.packages("pheatmap", repos="https://cloud.r-project.org", lib=cartella_lavoro)
-  library(pheatmap, lib.loc=cartella_lavoro)
-}
-gruppi_design <- trimws(unlist(strsplit(user_design, "\\+")))
-var_target <- tail(gruppi_design, n=1)
 top_genes <- head(order(res$padj), 50)
 mat <- assay(vsd)[top_genes, ]
 mat <- mat - rowMeans(mat)
-df_annotazione <- as.data.frame(colData(dds)[, var_target, drop=FALSE])
-colnames(df_annotazione) <- "Condition"
-livelli <- levels(as.factor(df_annotazione$Condizione))
-colori_condizione <- c("#00ced1", "#fa8072", "#33a02c", "#ff7f00")[1:length(livelli)]
-names(colori_condizione) <- livelli
-colori_annotazione <- list(Condizione = colori_condizione)
-pheatmap(mat, 
-         annotation_col = df_annotazione, 
-         annotation_colors = colori_annotazione,
-         show_colnames = TRUE,      
-         border_color = "white",    
-         fontsize_row = 8,          
-         main = paste("Heatmap Top 50 Genes (", var_target, ")")
-)
+
+colori_heatmap <- colorRampPalette(c("blue", "white", "red"))(256)
+
+heatmap(mat, 
+        scale="none", 
+        col=colori_heatmap, 
+        margins=c(6, 6),
+        cexCol=0.9,        
+        cexRow=0.8,         
+        main="4. Heatmap Top 50 Genes")
 
 
-# Top 4 genes counts plot
+
+# Top 6 genes counts plot
 par(mfrow=c(3,2)) 
 top6_geni <- head(order(res$padj), 6)
 for (i in top6_geni) {
