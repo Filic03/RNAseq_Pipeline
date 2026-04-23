@@ -107,7 +107,7 @@ for (i in top6_geni) {
   nome_del_gene <- rownames(res)[i]
   
   # Il tuo plotCounts base, ma con le opzioni estetiche attivate
-  plotCounts(dds, gene = nome_del_gene, intgroup = "condition", main = "Espression of:" nome_del_gene, col = colori_pro[dds$condition], pch = 16, cex = 1.5, xlab = "", ylab = "Normalized Counts"
+  plotCounts(dds, gene = nome_del_gene, intgroup = "condition", main = paste("Expression of:", nome_del_gene), col = colori_pro[dds$condition], pch = 16, cex = 1.5, xlab = "", ylab = "Normalized Counts"
   )
 }
 
