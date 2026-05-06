@@ -1,5 +1,5 @@
 sample,condition
-Sano_rep1,Healthy
-Sano_rep2,Healthy
-Malato_rep1,Diseased
-Malato_rep2,Diseased
+Healthy_rep1,Healthy
+Healthy_rep2,Healthy
+Diseased_rep1,Diseased
+Diseased_rep2,Diseased
