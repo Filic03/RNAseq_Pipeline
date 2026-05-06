@@ -51,10 +51,13 @@ dds <- tryCatch({
     DESeq(dds, sfType="poscounts")
 }, error = function(e) {
     message("\nCurve fitting standard fallito (troppo pochi geni).")
-    message("Uso il metodo 'mean' per completare l'analisi...\n")
-    return(DESeq(dds, sfType="poscounts", fitType="mean"))
+    message("Eseguo lo spacchettamento dell'algoritmo forzando i calcoli manuali...\n")
+    dds <- estimateSizeFactors(dds, type="poscounts")
+    dds <- estimateDispersionsGeneEst(dds)
+    dispersions(dds) <- mcols(dds)$dispGeneEst
+    dds <- nbinomWaldTest(dds)
+    return(dds)
 })
-
 
 res <- results(dds)
 
