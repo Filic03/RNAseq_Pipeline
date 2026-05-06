@@ -33,6 +33,16 @@ meta <- meta[common_samples, , drop=FALSE]
 
 design_formula <- as.formula(paste("~", user_design))
 
+if (length(unique(as.list(counts))) == 1) {
+    message("\n========================================================")
+    message("DETECTED: Samples Are Identical (Profile Test).")
+    message("Adding artificial batch effect in order to test the pipeline.")
+    message("========================================================\n")
+    set.seed(42)
+    rumore <- matrix(rpois(nrow(counts) * ncol(counts), lambda = 5), nrow = nrow(counts))
+    counts <- counts + rumore
+}
+
 dds <- DESeqDataSetFromMatrix(countData = counts, colData = meta, design = design_formula)
 keep <- rowSums(counts(dds)) >= 10
 dds <- dds[keep,]
