@@ -46,7 +46,16 @@ if (length(unique(as.list(counts))) == 1) {
 dds <- DESeqDataSetFromMatrix(countData = counts, colData = meta, design = design_formula)
 keep <- rowSums(counts(dds)) >= 10
 dds <- dds[keep,]
-dds <- DESeq(dds, sfType="poscounts")
+
+dds <- tryCatch({
+    DESeq(dds, sfType="poscounts")
+}, error = function(e) {
+    message("\nCurve fitting standard fallito (troppo pochi geni).")
+    message("Uso il metodo 'mean' per completare l'analisi...\n")
+    return(DESeq(dds, sfType="poscounts", fitType="mean"))
+})
+
+
 res <- results(dds)
 
 write.table(as.data.frame(res), file="risultati_analisi_differenziale.txt", sep="\t", quote=FALSE, row.names=FALSE)
