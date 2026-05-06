@@ -1,5 +1,5 @@
 sample,condition
-WT_rep1,Control
-WT_rep2,Control
-RAP1_rep1,Treated
-RAP1_rep2,Treated
+Sano_rep1,Healthy
+Sano_rep2,Healthy
+Malato_rep1,Diseased
+Malato_rep2,Diseased
