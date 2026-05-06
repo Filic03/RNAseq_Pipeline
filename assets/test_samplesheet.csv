@@ -1,0 +1,5 @@
+sample,condition,age,library_selection
+SRR8518319,normal_adiacent,52,cDNA
+SRR8518327,tumor,37,cDNA
+SRR8518335,normal_adiacent,62,cDNA
+SRR8518360,tumor,54,cDNA
