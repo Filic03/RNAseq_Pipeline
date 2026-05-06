@@ -86,7 +86,13 @@ pdf ("deseq2_plots.pdf")
 plotMA(res, main="MA Plot (test nf-core)")
 
 #PCA plot
-vsd <- vst(dds, blind=FALSE)
+if (nrow(dds) < 1000) {
+    message("Meno di 1000 geni: uso normTransform al posto di vst per i grafici.")
+    vsd <- normTransform(dds)
+} else {
+    vsd <- vst(dds, blind=FALSE)
+}
+
 gruppi_pca <- trimws(unlist(strsplit(user_design, "\\+")))
 
 pca_plot <- plotPCA(vsd, intgroup=gruppi_pca) + theme_minimal() + geom_point(size=4, alpha=0.9) + ggtitle("2. PCA") +
