@@ -1,7 +1,3 @@
-*Ignora i dati grezzi
-*.fastq.gz
-*.fastq
-*fq.gz
 
 .nextflow*
 
