@@ -1,0 +1,11 @@
+
+wget "https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/sarscov2/illumina/fastq/test_1.fastq.gz" -O Sano_rep1_1.fastq.gz
+wget "https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/sarscov2/illumina/fastq/test_2.fastq.gz" -O Sano_rep1_2.fastq.gz
+wget "https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/sarscov2/illumina/fastq/test_1.fastq.gz" -O Sano_rep2_1.fastq.gz
+wget "https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/sarscov2/illumina/fastq/test_2.fastq.gz" -O Sano_rep2_2.fastq.gz
+
+# Creiamo i "Malati" (stessi file, ma per ingannare DESeq2)
+wget "https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/sarscov2/illumina/fastq/test_1.fastq.gz" -O Malato_rep1_1.fastq.gz
+wget "https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/sarscov2/illumina/fastq/test_2.fastq.gz" -O Malato_rep1_2.fastq.gz
+wget "https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/sarscov2/illumina/fastq/test_1.fastq.gz" -O Malato_rep2_1.fastq.gz
+wget "https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/sarscov2/illumina/fastq/test_2.fastq.gz" -O Malato_rep2_2.fastq.gz
