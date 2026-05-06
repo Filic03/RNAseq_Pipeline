@@ -1,5 +1,5 @@
-sample,condition,age,library_selection
-SRR8518319,normal_adiacent,52,cDNA
-SRR8518327,tumor,37,cDNA
-SRR8518335,normal_adiacent,62,cDNA
-SRR8518360,tumor,54,cDNA
+sample,condition,age
+WT_rep1,Control
+WT_rep2,Control
+RAP1_rep1,Treated
+RAP1_rep2,Treated
