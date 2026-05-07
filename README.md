@@ -1,9 +1,3 @@
-This is a Nextflow based pipeline for RNAseq Analysis.
-
--Felice Di Casola
-
-
-
 <h1 align="center">
    FeliceDC/RNAseq_Pipeline
 </h1>
