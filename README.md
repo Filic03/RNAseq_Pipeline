@@ -5,7 +5,7 @@ This is a Nextflow based pipeline for RNAseq Analysis.
 
 
 <h1 align="center">
-  🧬 Filic03/RNAseq_Pipeline
+  🧬 FeliceDC/RNAseq_Pipeline
 </h1>
 
 <p align="center">
@@ -16,7 +16,7 @@ This is a Nextflow based pipeline for RNAseq Analysis.
 </p>
 
 ## 📖 Introduction
-**Filic03/RNAseq_Pipeline** is a bioinformatics analysis pipeline used for RNA sequencing data. Developed in Nextflow, it automates the entire workflow from raw FASTQ reads to Differential Expression analysis, ensuring reproducibility and scalability.
+**FeliceDC/RNAseq_Pipeline** is a bioinformatics analysis pipeline used for RNA sequencing data. Developed in Nextflow, it automates the entire workflow from raw FASTQ reads to Differential Expression analysis, ensuring reproducibility and scalability.
 
 The pipeline is built using Docker/Singularity containers, meaning you don't need to install any bioinformatics tools manually.
 
@@ -37,7 +37,7 @@ The pipeline is built using Docker/Singularity containers, meaning you don't nee
 You can test the pipeline on your system without downloading heavy datasets. We have provided a self-contained `test` profile that runs on a minimal Sars-Cov-2 dataset.
 
 ```bash
-nextflow run Filic03/RNAseq_Pipeline -profile test
+nextflow run FeliceDC/RNAseq_Pipeline -profile test
 ```
 
 If everything is set up correctly, this process will finish in less than a minute and generate the complete output folders.
