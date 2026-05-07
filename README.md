@@ -9,10 +9,9 @@ This is a Nextflow based pipeline for RNAseq Analysis.
 </h1>
 
 <p align="center">
-  ![Nextflow](https://img.shields.io/badge/nextflow%20DSL2-%E2%89%A523.04.0-23aa62.svg)
-  ![Status](https://img.shields.io/badge/status-active-success.svg)
-  ![STAR](https://img.shields.io/badge/aligner-STAR-blue)
-  ![DESeq2](https://img.shields.io/badge/stats-DESeq2-purple)
+  <img src="https://img.shields.io/badge/nextflow%20DSL2-%E2%89%A523.04.0-23aa62.svg" alt="Nextflow">
+  <img src="https://img.shields.io/badge/status-active-success.svg" alt="Status">
+  <img src="https://img.shields.io/badge/Bioinformatics-RNA--seq-blue" alt="Bioinformatics">
 </p>
 
 ## Introduction
