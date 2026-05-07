@@ -28,9 +28,10 @@ This pipeline automatically handles datasets with very small genomes (e.g., vira
 
 You can test the pipeline on your system without downloading heavy datasets. We have provided a self-contained `test` profile that runs on a minimal Sars-Cov-2 dataset.
 
-```bash
-nextflow run FeliceDC/RNAseq_Pipeline -profile test
-```
+>[!NOTE]
+>```bash
+>nextflow run FeliceDC/RNAseq_Pipeline -profile test
+>```
 
 If everything is set up correctly, this process will finish in less than a minute and generate the complete output folders.
 
@@ -67,6 +68,8 @@ Now you should be ready to run the pipeline.
 >nextflow run Filic03/RNAseq_Pipeline --input_reads "/apps/Felice/GSE/prova_per_nextflow/*_{1,2}.fastq.gz" --fasta "/apps/Felice/GSE/nuovo_genoma/GRCh38.primary_assembly.genome.fa" --gtf "/apps/Felice/GSE/nuovo_genoma/gencode.v49.primary_assembly.annotation.gtf" --design "condition + age" --samplesheet "./samplesheet.csv" --max_cpus 12
 >```
 
+>[!WARNING]
+>Running the pipeline on full human datasets requires significant computational resources. It is highly recommended to check your machine and specify an appropriate --max_cpus limit.
 
 ## Output Structure
 By default, the pipeline creates a results/ directory containing the following sub-directories:
@@ -79,7 +82,5 @@ By default, the pipeline creates a results/ directory containing the following s
 
 - deseq2/: CSV tables with statistically significant Differentially Expressed Genes (DEGs) and related plots (MA plot, PCA, Volcano plot, Heatmap ecc.).
 
->[!WARNING]
->Running the pipeline on full human datasets requires significant computational resources. It is highly recommended to check your machine and specify an appropriate --max_cpus limit.
 
 
