@@ -5,7 +5,7 @@ This is a Nextflow based pipeline for RNAseq Analysis.
 
 
 <h1 align="center">
-  🧬 FeliceDC/RNAseq_Pipeline
+  🧬 **FeliceDC/RNAseq_Pipeline**
 </h1>
 
 <p align="center">
