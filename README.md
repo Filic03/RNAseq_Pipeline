@@ -5,14 +5,14 @@ This is a Nextflow based pipeline for RNAseq Analysis.
 
 
 <h1 align="center">
-  🧬 **FeliceDC/RNAseq_Pipeline**
+  🧬 FeliceDC/RNAseq_Pipeline
 </h1>
 
 <p align="center">
-  ![Nextflow] (https://img.shields.io/badge/nextflow%20DSL2-%E2%89%A523.04.0-23aa62.svg)
-  ![Status] (https://img.shields.io/badge/status-active-success.svg)
-  ![STAR] (https://img.shields.io/badge/aligner-STAR-blue)
-  ![DESeq2] (https://img.shields.io/badge/stats-DESeq2-purple)
+  ![Nextflow](https://img.shields.io/badge/nextflow%20DSL2-%E2%89%A523.04.0-23aa62.svg)
+  ![Status](https://img.shields.io/badge/status-active-success.svg)
+  ![STAR](https://img.shields.io/badge/aligner-STAR-blue)
+  ![DESeq2](https://img.shields.io/badge/stats-DESeq2-purple)
 </p>
 
 ## 📖 Introduction
@@ -61,8 +61,7 @@ featurecounts/: Raw count matrices.
 
 deseq2/: CSV tables with statistically significant Differentially Expressed Genes (DEGs) and related plots (PCA, dispersion).
 
-[!WARNING]
-
-Running the pipeline on full human datasets requires significant computational resources. It is highly recommended to run the command inside a screen or tmux session, and specify an appropriate --max_cpus limit.
+>[!WAIT]
+>Running the pipeline on full human datasets requires significant computational resources. It is highly recommended to run the command inside a screen or tmux session, and specify an appropriate --max_cpus limit.
 
 
