@@ -11,9 +11,9 @@
 ## Introduction
 **FeliceDC/RNAseq_Pipeline** is a bioinformatics analysis pipeline used for RNA sequencing data. Developed in Nextflow, it automates the entire workflow from raw FASTQ reads to Differential Expression analysis, ensuring reproducibility and scalability.
 
-The pipeline is built using Docker/Singularity containers, meaning you don't need to install any bioinformatics tools manually.
+The pipeline is built using Docker containers, meaning you don't need to install any bioinformatics tools manually.
 
-This pipeline automatically handles datasets with very small genomes (e.g., viral genomes or targeted panels) by bypassing standard dispersion curves in DESeq2, preventing crashes common in other public workflows.
+This pipeline can automatically handles datasets with very small genomes (e.g., viral genomes or targeted panels) by bypassing standard dispersion curves in DESeq2, preventing crashes common in other public workflows.
 
 ## Pipeline Summary
 1. Raw read QC (`FastQC`)
@@ -26,14 +26,14 @@ This pipeline automatically handles datasets with very small genomes (e.g., vira
 
 ## Quick Start (Test Profile)
 
-You can test the pipeline on your system without downloading heavy datasets. We have provided a self-contained `test` profile that runs on a minimal Sars-Cov-2 dataset.
+Before running the pipeline with your data you can test it on your system without downloading heavy datasets. We have provided a self-contained `test` profile that runs on a minimal Sars-Cov-2 dataset.
 
 >[!NOTE]
 >```bash
 >nextflow run FeliceDC/RNAseq_Pipeline -profile test
 >```
 
-If everything is set up correctly, this process will finish in less than a minute and generate the complete output folders.
+If everything works correctly, this process will finish in less than a minute and generate the complete output folders.
 
 ## Usage with Real Data
 
@@ -41,8 +41,7 @@ To run the pipeline on your own samples, you need to provide:
 1. Your raw fastq.gz files
 2. A reference genome
 3. An annotation file
-4. A design matrix (named "samplesheet"). The samplesheet must be a comma-separated values file (.csv). The first column (called "sample") must match the FASTQ file names (excluding the _1.fastq.gz suffix), and the second column is the variable for the differential analysis. You can use a third column too for a double variables differential analysis.
-
+4. A design matrix (named "samplesheet"). The samplesheet must be a comma-separated values file (.csv). The first column (called "sample") must match the FASTQ file names (excluding the _1.fastq.gz suffix).The second column should contain the variable you want to use for differential analysis. Optionally, you can perform differential analysis using two variables if needed.
 Example:
 
 **samplesheet.csv**
@@ -54,7 +53,7 @@ SRR8518335,normal_adiacent,62,cDNA
 SRR8518360,tumor,54,cDNA
 ```
 
-Then, have ready your samplesheet, fastq, genome and gtf files paths.
+Once the samplesheet has been created, make sure you have ready the samplesheet, FASTQ files, genome, and GTF files paths.
 
 Now you should be ready to run the pipeline.
 >[!NOTE]
