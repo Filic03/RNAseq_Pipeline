@@ -21,7 +21,7 @@ The pipeline is built using Docker/Singularity containers, meaning you don't nee
 
 This pipeline automatically handles datasets with very small genomes (e.g., viral genomes or targeted panels) by bypassing standard dispersion curves in DESeq2, preventing crashes common in other public workflows.
 
-## 🛠 Pipeline Summary
+## Pipeline Summary
 1. Raw read QC (`FastQC`)
 2. Adapter and quality trimming (`Trim Galore!`)
 3. Read alignment and indexing (`STAR`)
@@ -67,13 +67,13 @@ Now you should be ready to run the pipeline.
 ## Output Structure
 By default, the pipeline creates a results/ directory containing the following sub-directories:
 
-fastqc/ & multiqc/: Interactive HTML quality reports.
+- fastqc/ & multiqc/: Interactive HTML quality reports.
 
-star/: Sorted .bam files ready for IGV visualization.
+- star/: Sorted .bam files ready for IGV visualization.
 
-featurecounts/: Raw count matrices.
+- featurecounts/: Raw count matrices.
 
-deseq2/: CSV tables with statistically significant Differentially Expressed Genes (DEGs) and related plots (PCA, dispersion).
+- deseq2/: CSV tables with statistically significant Differentially Expressed Genes (DEGs) and related plots (MA plot, PCA, Volcano plot, Heatmap ecc.).
 
 >[!WARNING]
 >Running the pipeline on full human datasets requires significant computational resources. It is highly recommended to check your machine and specify an appropriate --max_cpus limit.
