@@ -34,6 +34,36 @@ if (!params.input_reads || !params.fasta || !params.gtf) {
     """
 }
 
+workflow.onComplete {
+    def msg = """\
+        Pipeline execution summary
+        ---------------------------
+        Completed at: ${workflow.complete}
+        Duration    : ${workflow.duration}
+        Success     : ${workflow.success}
+        workDir     : ${workflow.workDir}
+        exit status : ${workflow.exitStatus}
+        """
+        .stripIndent()
+
+    println msg
+
+    if (workflow.success) {
+        println "✅ Analisi completata con successo! I risultati sono in: ${params.outdir}"
+    } else {
+        println "❌ Ops... la pipeline si è interrotta con un errore."
+    }
+
+    if (params.email) {
+        try {
+            sendMail(to: params.email, subject: "RNAseq Pipeline - Status", body: msg)
+            println "📧 Email di notifica inviata correttamente a: ${params.email}"
+        } catch (Exception e) {
+            println "⚠️ Impossibile inviare l'email. Controlla che il server supporti l'invio di posta."
+        }
+    }
+}
+
 include {RNA_SEQ_ANALYSIS} from './workflows/rnaseq_pipeline'
 
 workflow {
