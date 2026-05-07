@@ -9,10 +9,10 @@ This is a Nextflow based pipeline for RNAseq Analysis.
 </h1>
 
 <p align="center">
-  ![Nextflow](https://img.shields.io/badge/nextflow%20DSL2-%E2%89%A523.04.0-23aa62.svg)
-  ![Status](https://img.shields.io/badge/status-active-success.svg)
-  ![STAR](https://img.shields.io/badge/aligner-STAR-blue)
-  ![DESeq2](https://img.shields.io/badge/stats-DESeq2-purple)
+  ![Nextflow] (https://img.shields.io/badge/nextflow%20DSL2-%E2%89%A523.04.0-23aa62.svg)
+  ![Status] (https://img.shields.io/badge/status-active-success.svg)
+  ![STAR] (https://img.shields.io/badge/aligner-STAR-blue)
+  ![DESeq2] (https://img.shields.io/badge/stats-DESeq2-purple)
 </p>
 
 ## 📖 Introduction
@@ -28,8 +28,9 @@ The pipeline is built using Docker/Singularity containers, meaning you don't nee
 2. Adapter and quality trimming (`Trim Galore!`)
 3. Read alignment and indexing (`STAR`)
 4. Gene-level quantification (`featureCounts`)
-5. Differential Expression Analysis & Visualization (`DESeq2`)
-6. Pipeline QC report (`MultiQC`)
+5. Pipeline QC report (`MultiQC`)
+6. Differential Expression Analysis & Visualization (`DESeq2`)
+
 
 ## 🚀 Quick Start (Test Profile)
 
