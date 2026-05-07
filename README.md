@@ -19,8 +19,7 @@ This is a Nextflow based pipeline for RNAseq Analysis.
 
 The pipeline is built using Docker/Singularity containers, meaning you don't need to install any bioinformatics tools manually.
 
-> [!IMPORTANT]
-> This pipeline automatically handles datasets with very small genomes (e.g., viral genomes or targeted panels) by bypassing standard dispersion curves in DESeq2, preventing crashes common in other public workflows.
+This pipeline automatically handles datasets with very small genomes (e.g., viral genomes or targeted panels) by bypassing standard dispersion curves in DESeq2, preventing crashes common in other public workflows.
 
 ## 🛠 Pipeline Summary
 1. Raw read QC (`FastQC`)
@@ -58,7 +57,13 @@ SRR8518335,normal_adiacent,62,cDNA
 SRR8518360,tumor,54,cDNA
 ```
 
+Now you should be ready to run the pipeline.
+[!NOTE]
+An example code is
 
+```bash
+nextflow run Filic03/RNAseq_Pipeline --input_reads "/apps/Felice/GSE/prova_per_nextflow/*_{1,2}.fastq.gz" --fasta "/apps/Felice/GSE/nuovo_genoma/GRCh38.primary_assembly.genome.fa" --gtf "/apps/Felice/GSE/nuovo_genoma/gencode.v49.primary_assembly.annotation.gtf" --design "condition" --samplesheet "./samplesheet.csv"
+```
 
 ## Output Structure
 By default, the pipeline creates a results/ directory containing the following sub-directories:
