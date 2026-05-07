@@ -1,5 +1,5 @@
 process DESEQ2 {
-    tag "Analisi differenziale"
+    tag "Differential Analysis"
     label 'process_high'
 
     publishDir "${params.outdir}/deseq2", mode: 'copy'
