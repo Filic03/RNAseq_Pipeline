@@ -58,8 +58,8 @@ SRR8518360,tumor,54,cDNA
 ```
 
 Now you should be ready to run the pipeline.
-[!NOTE]
-An example code is
+>[!NOTE]
+>An example running code is
 
 ```bash
 nextflow run Filic03/RNAseq_Pipeline --input_reads "/apps/Felice/GSE/prova_per_nextflow/*_{1,2}.fastq.gz" --fasta "/apps/Felice/GSE/nuovo_genoma/GRCh38.primary_assembly.genome.fa" --gtf "/apps/Felice/GSE/nuovo_genoma/gencode.v49.primary_assembly.annotation.gtf" --design "condition" --samplesheet "./samplesheet.csv"
