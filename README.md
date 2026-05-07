@@ -49,8 +49,8 @@ To run the pipeline on your own samples, you need to provide:
 3. An annotation file
 4. A design matrix (named "samplesheet"). The samplesheet must be a comma-separated values file (.csv). The first column (called "sample") must match the FASTQ file names (excluding the _1.fastq.gz suffix), and the second column is the variable for the differential analysis. You can use a third column too for a double variables differential analysis.
    Example:
-   
-   ```bash
+
+```bash
 sample,condition,age,library_selection
 SRR8518319,normal_adiacent,52,cDNA
 SRR8518327,tumor,37,cDNA
