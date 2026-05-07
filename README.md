@@ -67,7 +67,7 @@ Now you should be ready to run the pipeline.
 ## Output Structure
 By default, the pipeline creates a results/ directory containing the following sub-directories:
 
-- fastqc/ & multiqc/: Interactive HTML quality reports.
+- fastqc/ and multiqc/: Interactive HTML quality reports.
 
 - star/: Sorted .bam files ready for IGV visualization.
 
