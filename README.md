@@ -38,6 +38,7 @@ You can test the pipeline on your system without downloading heavy datasets. We 
 
 ```bash
 nextflow run Filic03/RNAseq_Pipeline -profile test
+```bash
 
 If everything is set up correctly, this process will finish in less than a minute and generate the complete output folders.
 
