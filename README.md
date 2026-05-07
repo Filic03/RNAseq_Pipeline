@@ -38,3 +38,15 @@ You can test the pipeline on your system without downloading heavy datasets. We 
 
 ```bash
 nextflow run Filic03/RNAseq_Pipeline -profile test
+
+If everything is set up correctly, this process will finish in less than a minute and generate the complete output folders.
+
+## Usage with Real Data
+
+To run the pipeline on your own samples, you need to provide:
+1. Your raw fastq.gz files
+2. A reference genome
+3. An annotation file
+4. A design matrix ("samplesheet")
+
+
