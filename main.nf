@@ -51,15 +51,15 @@ workflow.onComplete {
     if (workflow.success) {
         println "✅ Analysis completed successfully! The results are in: ${params.outdir}"
     } else {
-        println "❌ Ops... la pipeline si è interrotta con un errore."
+        println "❌ Oops... the pipeline stopped due to an error."
     }
 
     if (params.email) {
         try {
             sendMail(to: params.email, subject: "RNAseq Pipeline - Status", body: msg)
-            println "📧 Email di notifica inviata correttamente a: ${params.email}"
+            println "📧 Notification email successfully sent to: ${params.email}"
         } catch (Exception e) {
-            println "⚠️ Impossibile inviare l'email. Controlla che il server supporti l'invio di posta."
+            println "⚠️ Unable to send the email."
         }
     }
 }
