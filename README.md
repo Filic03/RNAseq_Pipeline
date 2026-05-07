@@ -66,8 +66,12 @@ Now you should be ready to run the pipeline.
 >An example running code is
 >```bash
 >nextflow run Filic03/RNAseq_Pipeline --input_reads "/apps/Felice/GSE/prova_per_nextflow/*_{1,2}.fastq.gz" --fasta "/apps/Felice/GSE/nuovo_genoma/GRCh38.primary_assembly.genome.fa" --gtf "/apps/Felice/GSE/nuovo_genoma/gencode.v49.primary_assembly.annotation.gtf" --design "condition" --samplesheet "./samplesheet.csv" --max_cpus 20
+>
+>If you want, you can run Deseq2 with two variables. Then you have to write --design "variable1 + variable2"
+>
+>nextflow run Filic03/RNAseq_Pipeline --input_reads "/apps/Felice/GSE/prova_per_nextflow/*_{1,2}.fastq.gz" --fasta "/apps/Felice/GSE/nuovo_genoma/GRCh38.primary_assembly.genome.fa" --gtf "/apps/Felice/GSE/nuovo_genoma/gencode.v49.primary_assembly.annotation.gtf" --design "condition + age" --samplesheet "./samplesheet.csv" --max_cpus 12
 >```
-If you want, you can run Deseq2 with two variables. Then you have to write --design "variable1 + variable2"
+
 
 ## Output Structure
 By default, the pipeline creates a results/ directory containing the following sub-directories:
