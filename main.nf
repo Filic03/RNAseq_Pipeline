@@ -49,7 +49,7 @@ workflow.onComplete {
     println msg
 
     if (workflow.success) {
-        println "✅ Analisi completata con successo! I risultati sono in: ${params.outdir}"
+        println "✅ Analysis completed successfully! The results are in: ${params.outdir}"
     } else {
         println "❌ Ops... la pipeline si è interrotta con un errore."
     }
