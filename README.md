@@ -47,6 +47,21 @@ To run the pipeline on your own samples, you need to provide:
 1. Your raw fastq.gz files
 2. A reference genome
 3. An annotation file
-4. A design matrix ("samplesheet")
+4. A design matrix (named "samplesheet"). The samplesheet must be a comma-separated values file (.csv). The first column (called "sample") must match the FASTQ file names (excluding the _1.fastq.gz suffix), and the second column is the variable for the differential analysis. You can use a third column too for a double variables differential analysis.
+
+## 📁 Output Structure
+By default, the pipeline creates a results/ directory containing the following sub-directories:
+
+fastqc/ & multiqc/: Interactive HTML quality reports.
+
+star/: Sorted .bam files ready for IGV visualization.
+
+featurecounts/: Raw count matrices.
+
+deseq2/: CSV tables with statistically significant Differentially Expressed Genes (DEGs) and related plots (PCA, dispersion).
+
+[!WARNING]
+
+Running the pipeline on full human datasets requires significant computational resources. It is highly recommended to run the command inside a screen or tmux session, and specify an appropriate --max_cpus limit.
 
 
