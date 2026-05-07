@@ -5,7 +5,7 @@ This is a Nextflow based pipeline for RNAseq Analysis.
 
 
 <h1 align="center">
-  🧬 FeliceDC/RNAseq_Pipeline
+   FeliceDC/RNAseq_Pipeline
 </h1>
 
 <p align="center">
@@ -15,7 +15,7 @@ This is a Nextflow based pipeline for RNAseq Analysis.
   ![DESeq2](https://img.shields.io/badge/stats-DESeq2-purple)
 </p>
 
-## 📖 Introduction
+## Introduction
 **FeliceDC/RNAseq_Pipeline** is a bioinformatics analysis pipeline used for RNA sequencing data. Developed in Nextflow, it automates the entire workflow from raw FASTQ reads to Differential Expression analysis, ensuring reproducibility and scalability.
 
 The pipeline is built using Docker/Singularity containers, meaning you don't need to install any bioinformatics tools manually.
@@ -32,7 +32,7 @@ The pipeline is built using Docker/Singularity containers, meaning you don't nee
 6. Differential Expression Analysis & Visualization (`DESeq2`)
 
 
-## 🚀 Quick Start (Test Profile)
+## Quick Start (Test Profile)
 
 You can test the pipeline on your system without downloading heavy datasets. We have provided a self-contained `test` profile that runs on a minimal Sars-Cov-2 dataset.
 
@@ -50,7 +50,7 @@ To run the pipeline on your own samples, you need to provide:
 3. An annotation file
 4. A design matrix (named "samplesheet"). The samplesheet must be a comma-separated values file (.csv). The first column (called "sample") must match the FASTQ file names (excluding the _1.fastq.gz suffix), and the second column is the variable for the differential analysis. You can use a third column too for a double variables differential analysis.
 
-## 📁 Output Structure
+## Output Structure
 By default, the pipeline creates a results/ directory containing the following sub-directories:
 
 fastqc/ & multiqc/: Interactive HTML quality reports.
@@ -61,7 +61,7 @@ featurecounts/: Raw count matrices.
 
 deseq2/: CSV tables with statistically significant Differentially Expressed Genes (DEGs) and related plots (PCA, dispersion).
 
->[!WAIT]
->Running the pipeline on full human datasets requires significant computational resources. It is highly recommended to run the command inside a screen or tmux session, and specify an appropriate --max_cpus limit.
+>[!WARNING]
+>Running the pipeline on full human datasets requires significant computational resources. It is highly recommended to check your machine and specify an appropriate --max_cpus limit.
 
 
