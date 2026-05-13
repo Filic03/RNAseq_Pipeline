@@ -3,7 +3,7 @@ process STAR_INDEX {
     label 'process_high'
 publishDir "${params.outdir}/star_index", mode: 'copy'
 
-    container 'quay.io/biocontainers/star:2.7.10b--h6b7c446_1'
+    container 'quay.io/biocontainers/star:2.7.11b--h5ca1c30_8'
 
     input:
     path fasta
