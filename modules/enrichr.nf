@@ -16,7 +16,7 @@ process ENRICHR {
     """
     Rscript ${projectDir}/bin/run_enrichr.R \\
         --input filtered_results.txt \\
-        --databases "${params.enrichr_dbs}" \\
+        --databases "${params.enrichr_database}" \\
         --outdir .
     """
 }
