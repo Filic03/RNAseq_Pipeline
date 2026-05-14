@@ -5,6 +5,7 @@ include { FEATURECOUNTS } from '../modules/subread'
 include { MULTIQC } from '../modules/multiqc'
 include { DESEQ2 } from '../modules/deseq2'
 include { ENRICHR } from '../modules/enrichr'
+include { IMMUCELLAI } from '../modules/immucellai'
 
 workflow RNA_SEQ_ANALYSIS {
 log.info "RNA-seq analysis started..."
@@ -41,6 +42,8 @@ FEATURECOUNTS(ch_gtf, ch_bams_raccolti)
 DESEQ2(FEATURECOUNTS.out.counts, file(params.samplesheet))
 
 ENRICHR(DESEQ2.out.results_tables)
+
+IMMUCELLAI(FEATURECOUNTS.out.counts)
 
 log.info "The analysis completed successfully!"
 }
