@@ -59,12 +59,12 @@ dds <- tryCatch({
 
 res <- results(dds)
 
-write.table(as.data.frame(res), file="risultati_analisi_differenziale.txt", sep="\t", quote=FALSE, row.names=FALSE)
+write.table(as.data.frame(res), file="deseq2_results.txt", sep="\t", quote=FALSE, row.names=FALSE)
 
 res_clean <- res[!is.na(res$padj), ]
 res_filt <- res_clean[res_clean$padj < 0.05 & abs(res_clean$log2FoldChange) > 1.5, ]
 
-write.table(as.data.frame(res_filt), file="risultati_filtrati_stringenti.txt", sep="\t", quote=FALSE, row.names=FALSE)
+write.table(as.data.frame(res_filt), file="filtered_results.txt", sep="\t", quote=FALSE, row.names=FALSE)
 
 # --- SUPER EXCEL CREATIONS ---
 conteggi_normalizzati <- counts(dds, normalized=TRUE)
