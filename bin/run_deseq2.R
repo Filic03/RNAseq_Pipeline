@@ -48,8 +48,8 @@ dds <- dds[keep,]
 dds <- tryCatch({
     DESeq(dds, sfType="poscounts")
 }, error = function(e) {
-    message("\nCurve fitting standard fallito (troppo pochi geni).")
-    message("Eseguo lo spacchettamento dell'algoritmo forzando i calcoli manuali...\n")
+    message("\nStandard curve fitting failed (too few genes).")
+    message("Unpacking the algorithm and forcing manual calculations...\n")
     dds <- estimateSizeFactors(dds, type="poscounts")
     dds <- estimateDispersionsGeneEst(dds)
     dispersions(dds) <- mcols(dds)$dispGeneEst
@@ -66,15 +66,15 @@ res_filt <- res_clean[res_clean$padj < 0.05 & abs(res_clean$log2FoldChange) > 1.
 
 write.table(as.data.frame(res_filt), file="filtered_results.txt", sep="\t", quote=FALSE, row.names=FALSE)
 
-# --- SUPER EXCEL CREATIONS ---
-conteggi_normalizzati <- counts(dds, normalized=TRUE)
+
+normalized_count <- counts(dds, normalized=TRUE)
 res_df <- as.data.frame(res)
-tabella_completa <- merge(res_df, conteggi_normalizzati, by="row.names", all=TRUE)
-colnames(tabella_completa)[1] <- "Gene_Name"
-tabella_completa <- tabella_completa[order(tabella_completa$padj), ]
+complete_table <- merge(res_df, normalized_counts, by="row.names", all=TRUE)
+colnames(complete_table)[1] <- "Gene_Name"
+complete_table <- complete_table[order(tabella_completa$padj), ]
 
 
-write.table(as.data.frame(tabella_completa), file="tabella_completa.txt", sep="\t", quote=FALSE, row.names=FALSE)
+write.table(as.data.frame(complete_table), file="complete_table.txt", sep="\t", quote=FALSE, row.names=FALSE)
 
 #--- PLOTS ---
 
@@ -85,15 +85,15 @@ plotMA(res, main="MA Plot (test nf-core)")
 
 #PCA plot
 if (nrow(dds) < 1000) {
-    message("Meno di 1000 geni: uso normTransform al posto di vst per i grafici.")
+    message("MLess than 1000 genes: using normTransform instead of vst for plots")
     vsd <- normTransform(dds)
 } else {
     vsd <- vst(dds, blind=FALSE)
 }
 
-gruppi_pca <- trimws(unlist(strsplit(user_design, "\\+")))
+pca_groups <- trimws(unlist(strsplit(user_design, "\\+")))
 
-pca_plot <- plotPCA(vsd, intgroup=gruppi_pca) + theme_minimal() + geom_point(size=4, alpha=0.9) + ggtitle("2. PCA") +
+pca_plot <- plotPCA(vsd, intgroup=pca_groups) + theme_minimal() + geom_point(size=4, alpha=0.9) + ggtitle("2. PCA") +
   theme(
     plot.title = element_text(hjust = 0.5, face = "bold", size = 15), 
     panel.grid.major = element_line(color = "grey90"),                
@@ -124,27 +124,34 @@ heatmap(mat, scale="none", col=colori_heatmap, margins=c(6, 6), cexCol=0.9, cexR
 # 5. Top 6 genes counts plot
 par(mfrow=c(3,2), las=1) 
 
-colori_pro <- c("#1f78b4", "#e31a1c") 
-top6_geni <- head(order(res$padj), 6)
+main_condition <- pca_groups[length(pca_groups)]
+plot_colors <- c("#1f78b4", "#e31a1c", "#33a02c", "#ff7f00", "#6a3d9a", "#b15928")
+condition_factors <- as.factor(dds[[main_condition]])
+num_groups <- length(levels(condition_factors))
+dynamic_colors <- rep(plot_colors, length.out = num_groups)
 
-conteggi_top6 <- counts(dds, normalized=TRUE)[top6_geni, ]
-massimo_assoluto <- max(conteggi_top6)
+top6_genes <- head(order(res$padj), 6)
 
-limiti_y <- c(0.5, massimo_assoluto)
+if (length(top6_genes) > 0) {
+    top6_counts <- counts(dds, normalized=TRUE)[top6_genes, , drop = FALSE ]
+    absolute_max <- max(top6_counts)
+    y_limit <- c(0.5, absolute_max + (absolute_max * 0.1))
 
-for (i in top6_geni) {
-  nome_del_gene <- rownames(res)[i]
-  
-  # Disegniamo aggiungendo il parametro 'ylim'
-  plotCounts(dds, 
-             gene = nome_del_gene, 
-             intgroup = "condition", 
-             main = paste("Expression of:", nome_del_gene),
-             col = colori_pro[dds$condition], 
+    for (i in top6_genes) {
+      gene_name <- rownames(res)[i]
+
+      plotCounts(dds, 
+             gene = gene_name, 
+             intgroup = main_condition, 
+             main = paste("Expression of:", gene_name),
+             col = dynamic_colors[as.numeric(condition_factors)], 
              pch = 16,                             
              cex = 1.5,
-             ylim = limiti_y 
+             ylim = y_limit 
   )
+}
+} else {
+  message("No significant genes found to plot in Top 6 counts.")
 }
 
 
