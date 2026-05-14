@@ -1,5 +1,5 @@
 process FEATURECOUNTS {
-    tag "Tutti_i_campioni"
+    tag "All_Samples"
     label 'process_high'
     container 'quay.io/biocontainers/subread:2.0.6--he4a0461_0'
 
@@ -17,6 +17,6 @@ publishDir "${params.outdir}/featureCounts", mode: 'copy'
     
     def paired = params.single_end ? "" : "-p"
     """
-    featureCounts $paired -a $gtf -o matrice_conteggi.txt -T ${task.cpus} -g ${params.g} -s ${params.strandedness} $bams
+    featureCounts $paired -a $gtf -o counts.txt -T ${task.cpus} -g ${params.g} -s ${params.strandedness} $bams
     """
 }
