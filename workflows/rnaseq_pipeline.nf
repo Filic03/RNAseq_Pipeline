@@ -4,6 +4,7 @@ include { STAR_INDEX; STAR_ALIGN } from '../modules/star'
 include { FEATURECOUNTS } from '../modules/subread'
 include { MULTIQC } from '../modules/multiqc'
 include { DESEQ2 } from '../modules/deseq2'
+include { ENRICHR } from '../modules/enrichr'
 
 workflow RNA_SEQ_ANALYSIS {
 log.info "RNA-seq analysis started..."
@@ -38,6 +39,8 @@ FEATURECOUNTS(ch_gtf, ch_bams_raccolti)
     MULTIQC( ch_multiqc_files.collect() )
 
 DESEQ2(FEATURECOUNTS.out.counts, file(params.samplesheet))
+
+ENRICHR(DESEQ2.out.results_tables)
 
 log.info "The analysis completed successfully!"
 }
