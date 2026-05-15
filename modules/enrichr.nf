@@ -4,8 +4,8 @@ process ENRICHR {
 
     publishDir "${params.outdir}/enrichr", mode: 'copy'
 
-    container 'quay.io/biocontainers/r-enrichr:3.2--r42hc7247d7_0'
-
+    
+    container 'quay.io/biocontainers/r-base:4.3.1'
     input:
     path deseq2_results
 
