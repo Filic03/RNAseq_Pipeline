@@ -67,7 +67,7 @@ res_filt <- res_clean[res_clean$padj < 0.05 & abs(res_clean$log2FoldChange) > 1.
 write.table(as.data.frame(res_filt), file="filtered_results.txt", sep="\t", quote=FALSE, row.names=FALSE)
 
 
-normalized_count <- counts(dds, normalized=TRUE)
+normalized_counts <- counts(dds, normalized=TRUE)
 res_df <- as.data.frame(res)
 complete_table <- merge(res_df, normalized_counts, by="row.names", all=TRUE)
 colnames(complete_table)[1] <- "Gene_Name"
