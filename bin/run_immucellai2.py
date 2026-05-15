@@ -29,7 +29,7 @@ ref_data = immucellai2.load_tumor_reference_data()
 immucellai2.run_ImmuCellAI2(
     reference_file=ref_data,
     sample_file=tpm_file,
-    output_file="ImmuCellAI2_results.txt",
+    output_file="ImmuCellAI2_results.xlsx",
     thread_num=int(threads)
 )
 print("Analisi del microambiente tumorale completata con successo!")
