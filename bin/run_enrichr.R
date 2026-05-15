@@ -34,6 +34,7 @@ cat("Reading the DEGs gene file...\n")
 signif_genes <- read.table(opt$input, header=TRUE, sep="\t", stringsAsFactors=FALSE)
 
 gene_list <- as.character(signif_genes$Gene_Name)
+gene_list <- gene_list[!grepl("^ENSG", gene_list)]
 
 if (length(gene_list) == 0) {
     stop("No genes found in the input file")
