@@ -2,6 +2,7 @@
 import sys
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 input_excel = sys.argv[1]
 
