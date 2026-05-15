@@ -11,7 +11,7 @@ process IMMUCELLAI {
 
     output:
     path "tpm_matrix.txt"           , emit: tpm_matrix
-    path "ImmuCellAI2_results.txt"  , emit: fractions
+    path "ImmuCellAI2_results.xlsx"  , emit: fractions
 
     script:
     """
