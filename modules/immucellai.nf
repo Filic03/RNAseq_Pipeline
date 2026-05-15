@@ -15,7 +15,8 @@ process IMMUCELLAI {
 
     script:
     """
-  pip install --no-cache-dir --default-timeout=1000 pandas immucellai2
+  pip install --no-cache-dir --default-timeout=1000 pandas numba immucellai2
+
 python ${projectDir}/bin/run_immucellai2.py ${featurecounts_output} ${task.cpus}
     """
 }
