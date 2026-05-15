@@ -6,6 +6,7 @@ include { MULTIQC } from '../modules/multiqc'
 include { DESEQ2 } from '../modules/deseq2'
 include { ENRICHR } from '../modules/enrichr'
 include { IMMUCELLAI } from '../modules/immucellai'
+include { PLOT_DECONVOLUTION } from './modules/plot_deconvolution'
 
 workflow RNA_SEQ_ANALYSIS {
 log.info "RNA-seq analysis started..."
