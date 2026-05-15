@@ -7,7 +7,7 @@ process PLOT_DECONVOLUTION {
     container 'python:3.10-slim'
 
     input:
-    path immucellai_results // Il file Excel che esce da ImmuCellAI
+    path immucellai_results
 
     output:
     path "*.pdf", emit: plots
@@ -15,7 +15,7 @@ process PLOT_DECONVOLUTION {
     script:
     """
    
-    pip install --no-cache-dir pandas openpyxl matplotlib
+    pip install --no-cache-dir pandas openpyxl matplotlib seaborn
 
    
     python ${projectDir}/bin/plot_deconvolution.py ${immucellai_results}
