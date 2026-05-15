@@ -4,7 +4,7 @@ process IMMUCELLAI {
 
     publishDir "${params.outdir}/deconvolution", mode: 'copy'
 
-    container 'amancevice/pandas:2.1.1-slim'
+    container 'python:3.10-slim'
 
     input:
     path featurecounts_output
@@ -15,7 +15,7 @@ process IMMUCELLAI {
 
     script:
     """
-   pip install --default-timeout=1000 immucellai2
-    python ${projectDir}/bin/run_immucellai2.py ${featurecounts_output} ${task.cpus}
+  pip install --no-cache-dir --default-timeout=1000 pandas immucellai2
+python ${projectDir}/bin/run_immucellai2.py ${featurecounts_output} ${task.cpus}
     """
 }
