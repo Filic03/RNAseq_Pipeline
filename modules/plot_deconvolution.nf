@@ -15,7 +15,7 @@ process PLOT_DECONVOLUTION {
     script:
     """
    
-    pip install --no-cache-dir pandas openpyxl matplotlib seaborn
+    pip install --no-cache-dir pandas openpyxl matplotlib seaborn scipy
 
    
     python ${projectDir}/bin/plot_deconvolution.py ${immucellai_results}
