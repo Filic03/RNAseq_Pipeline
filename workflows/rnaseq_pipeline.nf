@@ -46,6 +46,8 @@ ENRICHR(DESEQ2.out.results_tables)
 
 IMMUCELLAI(FEATURECOUNTS.out.counts)
 
+PLOT_DECONVOLUTION( IMMUCELLAI.out.fractions )
+
 log.info "The analysis completed successfully!"
 }
 
