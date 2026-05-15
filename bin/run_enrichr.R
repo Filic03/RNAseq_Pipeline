@@ -1,5 +1,9 @@
 #!/usr/bin/env Rscript
 
+if (!requireNamespace("enrichR", quietly = TRUE)) {
+    install.packages("enrichR", repos="http://cran.us.r-project.org")
+}
+
 suppressPackageStartupMessages({
     library(enrichR)
     library(optparse)
