@@ -33,7 +33,7 @@ if (is.null(opt$input)){
 cat("Reading the DEGs gene file...\n")
 signif_genes <- read.table(opt$input, header=TRUE, sep="\t", stringsAsFactors=FALSE)
 
-gene_list <- signif_genes[, 1]
+gene_list <- as.character(signif_genes$Gene_Name)
 
 if (length(gene_list) == 0) {
     stop("No genes found in the input file")
