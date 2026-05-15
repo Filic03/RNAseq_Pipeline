@@ -4,6 +4,10 @@ if (!requireNamespace("enrichR", quietly = TRUE)) {
     install.packages("enrichR", repos="http://cran.us.r-project.org")
 }
 
+if (!requireNamespace("optparse", quietly = TRUE)) {
+    install.packages("optparse", repos="http://cran.us.r-project.org")
+}
+
 suppressPackageStartupMessages({
     library(enrichR)
     library(optparse)
