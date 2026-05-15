@@ -23,7 +23,7 @@ tpm_file = "tpm_matrix.txt"
 tpm.to_csv(tpm_file, sep='\t')
 
 print("3. Avvio di ImmuCellAI 2.0 (Deconvoluzione 53 sottotipi)...")
-# Carichiamo i dati di riferimento per i tumori (come da manuale ufficiale)
+
 ref_data = immucellai2.load_tumor_reference_data()
 
 immucellai2.run_ImmuCellAI2(
