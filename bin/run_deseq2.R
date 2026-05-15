@@ -71,7 +71,7 @@ normalized_counts <- counts(dds, normalized=TRUE)
 res_df <- as.data.frame(res)
 complete_table <- merge(res_df, normalized_counts, by="row.names", all=TRUE)
 colnames(complete_table)[1] <- "Gene_Name"
-complete_table <- complete_table[order(tabella_completa$padj), ]
+complete_table <- complete_table[order(complete_table$padj), ]
 
 
 write.table(as.data.frame(complete_table), file="complete_table.txt", sep="\t", quote=FALSE, row.names=FALSE)
