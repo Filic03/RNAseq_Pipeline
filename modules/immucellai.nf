@@ -1,22 +1,22 @@
 process IMMUCELLAI {
-    tag "Immune Deconvolution"
+    tag "TME Deconvolution v2"
     label 'process_high'
 
     publishDir "${params.outdir}/deconvolution", mode: 'copy'
 
-    container 'quay.io/biocontainers/r-base:4.3.1'
+    container 'quay.io/biocontainers/python:3.10'
 
     input:
     path featurecounts_output
 
     output:
-    path "tpm_matrix.txt"          , emit: tpm_matrix
-    path "ImmuCellAI_fractions.txt", emit: fractions
+    path "tpm_matrix.txt"           , emit: tpm_matrix
+    path "ImmuCellAI2_results.txt"  , emit: fractions
 
     script:
     """
-    Rscript ${projectDir}/bin/calculate_tpm.R ${featurecounts_output}
+    pip install pandas immucellai2
 
-    Rscript ${projectDir}/bin/run_immucellai.R tpm_matrix.txt
+    python ${projectDir}/bin/run_immucellai2.py ${featurecounts_output} ${task.cpus}
     """
 }
